@@ -7,14 +7,7 @@ Backend: Construido con Node.js, Express y Sequelize. Utiliza una base de datos 
 Frontend: Construido con React, TypeScript y Vite. Utiliza Tailwind CSS para el diseño y react-hook-form para el manejo de formularios.
 Backend
 Configuración
-El archivo .env contiene las variables de entorno necesarias para la configuración de la base de datos y el puerto del servidor:
-DB_USER=postgres
-DB_PASSWORD=mauro
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=postgres
-JWT_KEY=mi_clave_secreta
-PORT=3001
+
 Instalación y Ejecución
 Instala las dependencias:
 cd backend
