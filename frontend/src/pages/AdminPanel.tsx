@@ -72,11 +72,11 @@ const AdminPanel: React.FC = () => {
 
   return (
     <div className="admin-panel min-h-screen flex bg-gray-900 text-white">
-      <div className="form-container p-8 flex-1" style={{ backgroundColor: isUpdating ? '#333' : '#1a1a1a' }}>
+      <div className="form-container p-8 flex-1" style={{ backgroundColor: isUpdating ? '#1E3A8A' : '#1a1a1a' }}>
         <h1 className="text-3xl font-bold mb-6 text-center">{isUpdating ? 'Actualizar Dispositivo' : 'Añadir Dispositivo'}</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-800 p-6 rounded-lg shadow-md">
           <div className="mb-4">
-            <label className="block text-orange-500">ID del dispositivo</label>
+            <label className="block text-blue-500">ID del dispositivo</label>
             <input
               {...register('id', { required: 'El ID es obligatorio' })}
               placeholder="ID del dispositivo"
@@ -86,7 +86,7 @@ const AdminPanel: React.FC = () => {
             {errors.id && <p className="text-red-500 text-sm mt-1">{errors.id.message}</p>}
           </div>
           <div className="mb-4">
-            <label className="block text-orange-500">Nombre del dispositivo</label>
+            <label className="block text-blue-500">Nombre del dispositivo</label>
             <input
               {...register('name', { required: 'El nombre es obligatorio' })}
               placeholder="Nombre del dispositivo"
@@ -95,7 +95,7 @@ const AdminPanel: React.FC = () => {
             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
           </div>
           <div className="mb-4">
-            <label className="block text-orange-500">Descripción del dispositivo</label>
+            <label className="block text-blue-500">Descripción del dispositivo</label>
             <textarea
               {...register('description', { required: 'La descripción es obligatoria' })}
               placeholder="Descripción del dispositivo"
@@ -104,7 +104,7 @@ const AdminPanel: React.FC = () => {
             {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
           </div>
           <div className="mb-4">
-            <label className="block text-orange-500">Detalles del dispositivo</label>
+            <label className="block text-blue-500">Detalles del dispositivo</label>
             <textarea
               {...register('details', { required: 'Los detalles son obligatorios' })}
               placeholder="Detalles del dispositivo"
@@ -113,7 +113,7 @@ const AdminPanel: React.FC = () => {
             {errors.details && <p className="text-red-500 text-sm mt-1">{errors.details.message}</p>}
           </div>
           <div className="mb-4">
-            <label className="block text-orange-500">URL de la imagen</label>
+            <label className="block text-blue-500">URL de la imagen</label>
             <input
               {...register('imageUrl', { required: 'La URL de la imagen es obligatoria' })}
               placeholder="URL de la imagen"
@@ -121,7 +121,7 @@ const AdminPanel: React.FC = () => {
             />
             {errors.imageUrl && <p className="text-red-500 text-sm mt-1">{errors.imageUrl.message}</p>}
           </div>
-          <button type="submit" className="w-full bg-orange-500 text-white p-2 rounded-md hover:bg-orange-600 transition duration-200">
+          <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-200">
             {isUpdating ? 'Guardar Cambios' : 'Añadir Dispositivo'}
           </button>
           {isUpdating && (
@@ -144,7 +144,7 @@ const AdminPanel: React.FC = () => {
                   <strong className="text-lg">{device.name}</strong>: {device.description}
                 </div>
                 <div>
-                  <button onClick={() => openUpdateForm(device)} className="ml-4 text-orange-500 hover:underline">Actualizar</button>
+                  <button onClick={() => openUpdateForm(device)} className="ml-4 text-blue-500 hover:underline">Actualizar</button>
                   <button onClick={() => handleDelete(device.id)} className="ml-2 text-red-500 hover:underline">Eliminar</button>
                 </div>
               </li>

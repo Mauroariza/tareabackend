@@ -1,33 +1,27 @@
-import { useForm, FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
+import { useForm, FieldError } from 'react-hook-form';
 import instance from '../api/axios';
-import { ReactNode } from 'react';
-import 'tailwindcss/tailwind.css'; // Asegúrate de tener Tailwind CSS configurado
+import { useNavigate } from 'react-router-dom';
+import 'tailwindcss/tailwind.css';
+import { useAuthStore } from '../store/authStore';
 
 interface FormData {
   username: string;
   password: string;
 }
 
-type FormError = FieldError | Merge<FieldError, FieldErrorsImpl<FormData>>;
-
 const SignInPage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const navigate = useNavigate();
+  const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await instance.post('/auth/login', data);
-      localStorage.setItem('token', response.data.token);
-      // Redirigir al usuario a la página principal o de administración
+      await instance.post('/auth/login', data);
+      setIsAuthenticated(true);
+      navigate('/admin'); // Redirigir al usuario al panel de administración
     } catch (error) {
       console.error('Error al iniciar sesión', error);
     }
-  };
-
-  const getErrorMessage = (error: FormError | undefined): ReactNode => {
-    if (error && typeof error === 'object' && 'message' in error && typeof error.message === 'string') {
-      return error.message;
-    }
-    return null;
   };
 
   return (
@@ -40,7 +34,7 @@ const SignInPage = () => {
             placeholder="Nombre de usuario" 
             className="w-full p-2 border border-gray-300 rounded mt-1"
           />
-          {errors.username && getErrorMessage(errors.username) && <p className="text-red-500 text-sm mt-1">{getErrorMessage(errors.username)}</p>}
+          {errors.username && (errors.username as FieldError).message && <p className="text-red-500 text-sm mt-1">{(errors.username as FieldError).message}</p>}
         </div>
         <div className="mb-4">
           <input 
@@ -49,7 +43,7 @@ const SignInPage = () => {
             placeholder="Contraseña" 
             className="w-full p-2 border border-gray-300 rounded mt-1"
           />
-          {errors.password && getErrorMessage(errors.password) && <p className="text-red-500 text-sm mt-1">{getErrorMessage(errors.password)}</p>}
+          {errors.password && (errors.password as FieldError).message && <p className="text-red-500 text-sm mt-1">{(errors.password as FieldError).message}</p>}
         </div>
         <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Iniciar Sesión</button>
       </form>
