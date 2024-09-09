@@ -11,14 +11,7 @@ const {
   DB_PORT, 
   DB_NAME 
 } = process.env;
-// Agrega este console.log para verificar las variables de entorno
-console.log({
-  DB_USER, 
-  DB_PASSWORD, 
-  DB_HOST, 
-  DB_PORT, 
-  DB_NAME 
-});
+
 if (!DB_USER || !DB_PASSWORD || !DB_HOST || !DB_PORT || !DB_NAME) {
   throw new Error('Missing environment variables for database connection');
 }
@@ -38,13 +31,6 @@ const sequelize = new Sequelize({
 const Device = DeviceFactory(sequelize);
 const Comment = CommentFactory(sequelize);
 const User = UserFactory(sequelize);
-
-// Registrar los modelos cargados
-console.log('Modelos cargados:', {
-  Device: !!Device,
-  Comment: !!Comment,
-  User: !!User
-});
 
 export { Device, Comment, User };
 export default sequelize;
